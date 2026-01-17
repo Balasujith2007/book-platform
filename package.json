@@ -1,0 +1,14 @@
+{
+  "name": "book-platform",
+  "version": "1.0.0",
+  "description": "Simple Book Platform using MERN Stack",
+  "main": "server.js",
+  "scripts": {
+    "server": "node server/server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": ["mern", "books", "platform"],
+  "author": "",
+  "license": "MIT"
+}
