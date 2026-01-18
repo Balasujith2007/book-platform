@@ -5,7 +5,20 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const books = await Book.find().limit(50);
+    const { search, limit = 50 } = req.query;
+    let query = {};
+
+    if (search) {
+      query = {
+        $or: [
+          { title: { $regex: search, $options: 'i' } },
+          { author: { $regex: search, $options: 'i' } },
+          { description: { $regex: search, $options: 'i' } }
+        ]
+      };
+    }
+
+    const books = await Book.find(query).limit(parseInt(limit));
     res.json(books);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
